@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditQuestionsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditQuestionsLabel_question}" for="question" />
+                    <h:inputText id="question" value="#{questionsController.selected.question}" title="#{bundle.EditQuestionsTitle_question}" required="true" requiredMessage="#{bundle.EditQuestionsRequiredMessage_question}"/>
+                    <h:outputLabel value="#{bundle.EditQuestionsLabel_questionId}" for="questionId" />
+                    <h:inputText id="questionId" value="#{questionsController.selected.questionId}" title="#{bundle.EditQuestionsTitle_questionId}" required="true" requiredMessage="#{bundle.EditQuestionsRequiredMessage_questionId}"/>
+                    <h:outputLabel value="#{bundle.EditQuestionsLabel_qtaskId}" for="qtaskId" />
+                    <h:selectOneMenu id="qtaskId" value="#{questionsController.selected.qtaskId}" title="#{bundle.EditQuestionsTitle_qtaskId}" required="true" requiredMessage="#{bundle.EditQuestionsRequiredMessage_qtaskId}">
+                        <f:selectItems value="#{tasksController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{questionsController.update}" value="#{bundle.EditQuestionsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditQuestionsViewLink}"/>
+                <br />
+                <h:commandLink action="#{questionsController.prepareList}" value="#{bundle.EditQuestionsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditQuestionsIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

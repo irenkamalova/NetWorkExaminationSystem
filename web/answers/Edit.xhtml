@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAnswersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAnswersLabel_answerId}" for="answerId" />
+                    <h:inputText id="answerId" value="#{answersController.selected.answerId}" title="#{bundle.EditAnswersTitle_answerId}" required="true" requiredMessage="#{bundle.EditAnswersRequiredMessage_answerId}"/>
+                    <h:outputLabel value="#{bundle.EditAnswersLabel_answer}" for="answer" />
+                    <h:inputText id="answer" value="#{answersController.selected.answer}" title="#{bundle.EditAnswersTitle_answer}" required="true" requiredMessage="#{bundle.EditAnswersRequiredMessage_answer}"/>
+                    <h:outputLabel value="#{bundle.EditAnswersLabel_aquestionId}" for="aquestionId" />
+                    <h:selectOneMenu id="aquestionId" value="#{answersController.selected.aquestionId}" title="#{bundle.EditAnswersTitle_aquestionId}" required="true" requiredMessage="#{bundle.EditAnswersRequiredMessage_aquestionId}">
+                        <f:selectItems value="#{questionsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{answersController.update}" value="#{bundle.EditAnswersSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAnswersViewLink}"/>
+                <br />
+                <h:commandLink action="#{answersController.prepareList}" value="#{bundle.EditAnswersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAnswersIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

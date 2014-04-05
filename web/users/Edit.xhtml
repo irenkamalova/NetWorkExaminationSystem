@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUsersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditUsersLabel_firstName}" for="firstName" />
+                    <h:inputText id="firstName" value="#{usersController.selected.firstName}" title="#{bundle.EditUsersTitle_firstName}" />
+                    <h:outputLabel value="#{bundle.EditUsersLabel_nickName}" for="nickName" />
+                    <h:inputText id="nickName" value="#{usersController.selected.nickName}" title="#{bundle.EditUsersTitle_nickName}" />
+                    <h:outputLabel value="#{bundle.EditUsersLabel_lastName}" for="lastName" />
+                    <h:inputText id="lastName" value="#{usersController.selected.lastName}" title="#{bundle.EditUsersTitle_lastName}" />
+                    <h:outputLabel value="#{bundle.EditUsersLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{usersController.selected.email}" title="#{bundle.EditUsersTitle_email}" />
+                    <h:outputLabel value="#{bundle.EditUsersLabel_password}" for="password" />
+                    <h:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.EditUsersTitle_password}" />
+                    <h:outputLabel value="#{bundle.EditUsersLabel_status}" for="status" />
+                    <h:inputText id="status" value="#{usersController.selected.status}" title="#{bundle.EditUsersTitle_status}" />
+                    <h:outputLabel value="#{bundle.EditUsersLabel_memberSince}" for="memberSince" />
+                    <h:inputText id="memberSince" value="#{usersController.selected.memberSince}" title="#{bundle.EditUsersTitle_memberSince}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditUsersLabel_userId}" for="userId" />
+                    <h:inputText id="userId" value="#{usersController.selected.userId}" title="#{bundle.EditUsersTitle_userId}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_userId}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{usersController.update}" value="#{bundle.EditUsersSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditUsersViewLink}"/>
+                <br />
+                <h:commandLink action="#{usersController.prepareList}" value="#{bundle.EditUsersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditUsersIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAnswersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAnswersLabel_answerId}" for="answerId" />
+                    <h:inputText id="answerId" value="#{answersController.selected.answerId}" title="#{bundle.CreateAnswersTitle_answerId}" required="true" requiredMessage="#{bundle.CreateAnswersRequiredMessage_answerId}"/>
+                    <h:outputLabel value="#{bundle.CreateAnswersLabel_answer}" for="answer" />
+                    <h:inputText id="answer" value="#{answersController.selected.answer}" title="#{bundle.CreateAnswersTitle_answer}" required="true" requiredMessage="#{bundle.CreateAnswersRequiredMessage_answer}"/>
+                    <h:outputLabel value="#{bundle.CreateAnswersLabel_aquestionId}" for="aquestionId" />
+                    <h:selectOneMenu id="aquestionId" value="#{answersController.selected.aquestionId}" title="#{bundle.CreateAnswersTitle_aquestionId}" required="true" requiredMessage="#{bundle.CreateAnswersRequiredMessage_aquestionId}">
+                        <f:selectItems value="#{questionsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{answersController.create}" value="#{bundle.CreateAnswersSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{answersController.prepareList}" value="#{bundle.CreateAnswersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAnswersIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
