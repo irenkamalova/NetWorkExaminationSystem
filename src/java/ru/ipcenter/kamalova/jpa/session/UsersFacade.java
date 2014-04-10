@@ -37,8 +37,11 @@ public class UsersFacade extends AbstractFacade<Users> {
     
     public boolean ifexist(String user, String password) {
         try {
-            findUser(user).equals(findPassword(password));
-            return true;
+            if(findUser(user).equals(findPassword(password))) {
+                return true;
+            }
+            else
+            return false;
         }
         catch(javax.persistence.NoResultException e) {
             return false;
