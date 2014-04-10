@@ -9,6 +9,7 @@ package ru.ipcenter.kamalova.jpa.session;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import ru.ipcenter.kamalova.jpa.entities.Users;
 
 /**
@@ -24,7 +25,25 @@ public class UsersFacade extends AbstractFacade<Users> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
+    
+    public Users findUser(String user) {
+        return (Users) em.createNamedQuery("Users.findByNickName").setParameter("nickName", user).getSingleResult();
+    }
+    
+    public Users findPassword(String password) {
+        return (Users) em.createNamedQuery("Users.findByPassword").setParameter("password", password).getSingleResult();
+    }
+    
+    public boolean ifexist(String user, String password) {
+        try {
+            findUser(user).equals(findPassword(password));
+            return true;
+        }
+        catch(javax.persistence.NoResultException e) {
+            return false;
+        }
+    }
     public UsersFacade() {
         super(Users.class);
     }

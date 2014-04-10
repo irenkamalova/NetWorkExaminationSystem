@@ -15,7 +15,6 @@
                 <h:outputText value="#{q_item.question}"/>
                 <h:selectOneRadio id="answer" layout="pageDirection" value="#{testController.getAnswerList(q_item.questionId)}">
                     <f:selectItems var="answ" value="#{testController.getAnswerList(q_item.questionId)}" >
-                        <h:outputText value="#{answ.answerId}"/>
                     </f:selectItems>
                 </h:selectOneRadio>
             </h:column>

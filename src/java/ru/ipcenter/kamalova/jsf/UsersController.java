@@ -21,14 +21,37 @@ import javax.faces.model.SelectItem;
 @ManagedBean(name = "usersController")
 @SessionScoped
 public class UsersController implements Serializable {
-
+    private String user;
+    private String password;
     private Users current;
     private DataModel items = null;
     @EJB
     private ru.ipcenter.kamalova.jpa.session.UsersFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    @EJB
+    private UsersFacade uf;
 
+    
+    //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    
+    
     public UsersController() {
     }
 
@@ -225,7 +248,16 @@ public class UsersController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Users.class.getName());
             }
         }
-
     }
+    
+
+    public String checkUser() {
+        if (uf.ifexist(this.user, this.password)) {
+            return "success";
+        } else {
+            return "loginfailed";
+        }
+    }
+        
 
 }
