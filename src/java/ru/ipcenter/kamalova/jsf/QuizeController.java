@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ru.ipcenter.kamalova.jsf;
 
 import java.io.Serializable;
@@ -19,39 +18,52 @@ import ru.ipcenter.kamalova.jpa.session.QuestionsFacade;
  */
 @ManagedBean(name = "quizeController")
 @SessionScoped
-public class QuizeController implements Serializable{
-     
-     private String question;
-     private String answer;
-     private int score;
-     private int currentQuestionId;
-     private QuestionsFacade qf;
-     private String response;
-     
-     public String getResponse() { return response; }
-     public void setResponse(String newValue) { response = newValue; }
-     
-     public List<Questions> getQuestionsList(){
-         return qf.findAll();
-     }
-     
-     public String getAnswer() {
-         return answer;
-     }
-      public int getScore() {
-          return score;
-      }
+public class QuizeController implements Serializable {
 
- public String getQuestion() { return "wtf?"; }
+    private String question;
+    private String answer = "7";
+    private int score;
+    private QuestionsFacade qf;
+    private String response;
 
+    public String getResponse() {
+        return response;
+    }
 
- // Переопределить в целях более сложной проверки
- public boolean isCorrect(String response) {
- return response.trim().equalsIgnoreCase(answer);
- }
+    public void setResponse(String newValue) {
+        response = newValue;
+    }
+
+    public List<Questions> getQuestionsList() {
+        return qf.findAll();
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public boolean isCorrect(String response) {
+        return response.trim().equalsIgnoreCase(answer);
+    }
+    
+    public boolean isCorrect() {
+        return response.trim().equalsIgnoreCase(answer);
+        
+    }
+    
+    public String answerAction() {
+        score = 7;
+        if(this.isCorrect())
+            score++;
+        return "resultpage";
+    }
+    
 }
 
-
     // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+// "Insert Code > Add Business Method")
 

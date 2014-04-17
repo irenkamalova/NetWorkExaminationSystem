@@ -6,7 +6,12 @@
         <title>Result Page</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        Look at your result!
+        <h:form>
+            <h:outputText value="Your score is: "/>
+            <h:outputText value="#{quizeController.score}"/>
+        </h:form>
+        
     </h:body>
 </html>
 
