@@ -6,7 +6,17 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form>
+            <h:dataTable var="q_item" value="#{testController.questionsList}">
+                <h:column>
+                    <p><h:outputText value="#{q_item.question}"/></p>
+                    <p><h:inputText value="#{quizeController.response}"/></p>
+                </h:column>
+            </h:dataTable>
+            <p>
+                <h:commandButton value="Проверить ответы" action="resultpage"/>
+            </p>
+        </h:form>
     </h:body>
 </html>
 
