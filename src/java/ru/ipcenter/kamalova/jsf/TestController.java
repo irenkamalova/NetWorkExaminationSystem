@@ -45,6 +45,63 @@ public class TestController {
         testpage = "Test is not exist";
         //return "testpage";
     }
+ //tests tttttttttttttttttttttttttt   
+    public String test1() {
+        return "task1page";
+    }
+    
+    public String test2() {
+        return "test2";
+    }
+    
+    public String test3() {
+        return "test3";
+    }
+    
+    public String test4() {
+        return "test4";
+    }    
+
+    public String test5() {
+        return "test5";
+    }
+    
+    public String test6() {
+        return "test7";
+    }
+
+    public String finalTest() {
+        return "test";
+    }
+//ttttttttttttttttttttttttttttttttt
+    public String answersAction() {
+        return "resultpage";
+    }
+    
+     /*public String answerAction() {
+       
+        if (problems.get(currentProblem).isCorrect(response)) {
+            score++;
+            nextProblem();
+            if (currentProblem == problems.size()) {
+                return "done";
+            } else {
+                return "success";
+            }
+        } else if (tries == 1) {
+            return "again";
+        } else {
+            nextProblem();
+            if (currentProblem == problems.size()) {
+                return "done";
+            } else {
+                return "failure";
+            }
+        }
+        
+        return "";
+    }*/
+    
     
     public List<Questions> getQuestionsList() {
         return qf.findAll();        

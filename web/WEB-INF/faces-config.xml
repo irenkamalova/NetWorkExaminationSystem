@@ -12,5 +12,23 @@
             <base-name>/resources/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
+<!--      it's my addition                 -->
+        <navigationrule>
+            <fromviewid>/index.xhtml</fromviewid>
+            <navigationcase>
+                <fromoutcome>success</fromoutcome>
+                <toviewid>/autorisation/success.xhtml</toviewid>
+            </navigationcase>
+        </navigationrule>
+<!--      end of my addition                 -->  
+<!--        loggout                         -->
+        <navigationrule>
+            <navigationcase>
+                <fromoutcome>logout</fromoutcome>
+                <toviewid>/loggedOut.xhtml</toviewid>
+            </navigationcase>
+        </navigationrule>   
+<!--            end of loggout              -->  
+         
     </application>
 </faces-config>

@@ -12,13 +12,14 @@
         </p:panel>
         <h:form>
             <h:panelGrid columns="3" cellpadding="5">
-                            <h:outputText value="Текст: "/>
-            <p:inputText value="#{mainBean.text}">
-                <p:ajax event="keyup" update="out1"/>
-            </p:inputText>
-            <h:outputText id="out1" value="#{mainBean.text}"/>
-                
+                <h:outputText value="Текст: "/>
+                <p:inputText value="#{mainBean.text}">
+                    <p:ajax event="keyup" update="out1"/>
+                </p:inputText>
+                <h:outputText id="out1" value="#{mainBean.text}"/>
             </h:panelGrid>
+            <br />
+            <h:link outcome="/test/testpage" value="Test Page"/>
         </h:form>
     </h:body>
 </html>

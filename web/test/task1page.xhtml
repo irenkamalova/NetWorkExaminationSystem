@@ -10,15 +10,18 @@
         Look and answer
         <br/>
         <br/>
-        <h:dataTable var="q_item" value="#{testController.questionsList}" >
-            <h:column>
-                <h:outputText value="#{q_item.question}"/>
-                <h:selectOneRadio id="answer" layout="pageDirection" value="#{testController.getAnswerList(q_item.questionId)}">
-                    <f:selectItems var="answ" value="#{testController.getAnswerList(q_item.questionId)}" >
-                    </f:selectItems>
-                </h:selectOneRadio>
-            </h:column>
-        </h:dataTable>
+        <h:form>
+            <h:dataTable var="q_item" value="#{testController.questionsList}" >
+                <h:column>
+                    <h:outputText value="#{q_item.question}"/>
+                    <h:selectOneRadio id="answer" layout="pageDirection" value="#{testController.getAnswerList(q_item.questionId)}">
+                        <f:selectItems var="answ" value="#{testController.getAnswerList(q_item.questionId)}" >
+                        </f:selectItems>
+                    </h:selectOneRadio>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Завершить тест" action="resultpage" />
+        </h:form>    
     </h:body>
 </html>
 
