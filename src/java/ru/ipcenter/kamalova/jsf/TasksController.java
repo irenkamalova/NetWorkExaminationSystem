@@ -18,14 +18,15 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "tasksController")
+
+@ManagedBean(name="tasksController")
 @SessionScoped
 public class TasksController implements Serializable {
 
+
     private Tasks current;
     private DataModel items = null;
-    @EJB
-    private ru.ipcenter.kamalova.jpa.session.TasksFacade ejbFacade;
+    @EJB private ru.ipcenter.kamalova.jpa.session.TasksFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -43,7 +44,6 @@ public class TasksController implements Serializable {
     private TasksFacade getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -55,7 +55,7 @@ public class TasksController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -68,7 +68,7 @@ public class TasksController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Tasks) getItems().getRowData();
+        current = (Tasks)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -82,16 +82,16 @@ public class TasksController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TasksCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("resources/Bundle").getString("TasksCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("resources/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Tasks) getItems().getRowData();
+        current = (Tasks)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,16 +99,16 @@ public class TasksController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TasksUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("resources/Bundle").getString("TasksUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("resources/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String destroy() {
-        current = (Tasks) getItems().getRowData();
+        current = (Tasks)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,9 +132,9 @@ public class TasksController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TasksDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("resources/Bundle").getString("TasksDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/resources/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("resources/Bundle").getString("PersistenceErrorOccured"));
         }
     }
 
@@ -142,14 +142,14 @@ public class TasksController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -188,7 +188,8 @@ public class TasksController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass = Tasks.class)
+
+    @FacesConverter(forClass=Tasks.class)
     public static class TasksControllerConverter implements Converter {
 
         @Override
@@ -196,7 +197,7 @@ public class TasksController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TasksController controller = (TasksController) facesContext.getApplication().getELResolver().
+            TasksController controller = (TasksController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "tasksController");
             return controller.ejbFacade.find(getKey(value));
         }
@@ -222,7 +223,7 @@ public class TasksController implements Serializable {
                 Tasks o = (Tasks) object;
                 return getStringKey(o.getTaskId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Tasks.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Tasks.class.getName());
             }
         }
 

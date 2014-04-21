@@ -23,6 +23,8 @@
                     <h:selectOneMenu id="qtaskId" value="#{questionsController.selected.qtaskId}" title="#{bundle.CreateQuestionsTitle_qtaskId}" required="true" requiredMessage="#{bundle.CreateQuestionsRequiredMessage_qtaskId}">
                         <f:selectItems value="#{tasksController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateQuestionsLabel_test}" for="test" />
+                    <h:inputText id="test" value="#{questionsController.selected.test}" title="#{bundle.CreateQuestionsTitle_test}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{questionsController.create}" value="#{bundle.CreateQuestionsSaveLink}" />

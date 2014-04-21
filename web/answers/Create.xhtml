@@ -23,6 +23,8 @@
                     <h:selectOneMenu id="aquestionId" value="#{answersController.selected.aquestionId}" title="#{bundle.CreateAnswersTitle_aquestionId}" required="true" requiredMessage="#{bundle.CreateAnswersRequiredMessage_aquestionId}">
                         <f:selectItems value="#{questionsController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAnswersLabel_rightAnswer}" for="rightAnswer" />
+                    <h:inputText id="rightAnswer" value="#{answersController.selected.rightAnswer}" title="#{bundle.CreateAnswersTitle_rightAnswer}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{answersController.create}" value="#{bundle.CreateAnswersSaveLink}" />

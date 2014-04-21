@@ -37,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Questions.findByQuestion", query = "SELECT q FROM Questions q WHERE q.question = :question"),
     @NamedQuery(name = "Questions.findByQuestionId", query = "SELECT q FROM Questions q WHERE q.questionId = :questionId")})
 public class Questions implements Serializable {
+    @Column(name = "test")
+    private Integer test;
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -123,6 +125,14 @@ public class Questions implements Serializable {
     @Override
     public String toString() {
         return "ru.ipcenter.kamalova.jpa.entities.Questions[ questionId=" + questionId + " ]";
+    }
+
+    public Integer getTest() {
+        return test;
+    }
+
+    public void setTest(Integer test) {
+        this.test = test;
     }
     
 }

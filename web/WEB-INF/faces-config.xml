@@ -28,7 +28,14 @@
                 <toviewid>/loggedOut.xhtml</toviewid>
             </navigationcase>
         </navigationrule>   
-<!--            end of loggout              -->  
-         
+<!--            end of loggout              -->
+        <resource-bundle>
+            <base-name>/resources/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>resources/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
     </application>
 </faces-config>

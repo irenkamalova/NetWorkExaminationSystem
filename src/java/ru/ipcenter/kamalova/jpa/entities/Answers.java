@@ -32,6 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Answers.findByAnswerId", query = "SELECT a FROM Answers a WHERE a.answerId = :answerId"),
     @NamedQuery(name = "Answers.findByAnswer", query = "SELECT a FROM Answers a WHERE a.answer = :answer")})
 public class Answers implements Serializable {
+    @Column(name = "right_answer")
+    private Boolean rightAnswer;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -107,6 +109,14 @@ public class Answers implements Serializable {
     @Override
     public String toString() {
         return "ru.ipcenter.kamalova.jpa.entities.Answers[ answerId=" + answerId + " ]";
+    }
+
+    public Boolean getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public void setRightAnswer(Boolean rightAnswer) {
+        this.rightAnswer = rightAnswer;
     }
     
 }
