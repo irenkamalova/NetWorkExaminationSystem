@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ru.ipcenter.kamalova.jsf;
 
 import java.io.Serializable;
@@ -29,7 +25,6 @@ public class QuizeController implements Serializable {
     public QuizeController() {
     }
 
-    private String question;
     private ArrayList<String> answers = new ArrayList<String>();
     private static final Logger LOG = LoggerFactory.getLogger(QuizeController.class);
     private int score;
@@ -37,6 +32,9 @@ public class QuizeController implements Serializable {
     @EJB
     private QuestionsFacade qf;
     private ArrayList<String> responseList = new ArrayList<String>();
+    private int TestNumber;
+    private ArrayList<Questions> questions = new ArrayList<Questions>();
+    private boolean flag = true;
 
     public String getResponse() {
         return response;
@@ -62,9 +60,25 @@ public class QuizeController implements Serializable {
         responseList.add(response);
     }
 
-    public List<Questions> getQuestionsList() {
-        return qf.findAll();
-        
+    public void setTestNumber(int number) {
+        TestNumber = number;
+    }
+
+    public ArrayList<Questions> getQuestionsList() {
+        questions.clear();
+        List<Questions> QAll = new ArrayList<Questions>();
+        QAll = qf.findAll();
+        LOG.info("In answer action function!!!!!!! " + QAll.size());
+        LOG.info("In answer action function!!!!!!! " + QAll.get(0));
+        LOG.info("In answer action function!!!!!!! " + TestNumber + " " + QAll.get(8).getTest());
+        for (int i = 0; i < QAll.size(); i++) {
+            LOG.info("In answer action function!!!!!!! " + QAll.get(i).getTest());
+            if (QAll.get(i).getTest().equals(TestNumber)) {
+                LOG.info("In if!!!!!!! " + QAll.get(i).getTest());
+                questions.add(QAll.get(i));
+            }
+        }
+        return questions;
     }
 
     public List<String> getAnswerList(Short qid) {
@@ -75,12 +89,25 @@ public class QuizeController implements Serializable {
         }
         return result;
     }
-    
+
     public void setAnswers() {
         answers.clear();
-        for(int i = 0; i < getQuestionsList().size(); i++) {
-            List<String> CurrentAnswers = getAnswerList(getQuestionsList().get(i).getQuestionId());
-            answers.add(CurrentAnswers.get(0));
+        Short qid;
+        LOG.info("In SETanswer action function!!!!!!! " + questions.size());
+        for (int i = 0; i < questions.size(); i++) {
+            LOG.info("In for in SETanswer action function!!!!!!! " + questions.size());
+            qid = questions.get(i).getQuestionId();
+            LOG.info("In for of SETanswer action function!!!!!!! " + qid);
+            List<String> CurrentAnswers = getAnswerList(qid);
+            if (CurrentAnswers.size() == 0) {
+                LOG.info("! " + CurrentAnswers.size());
+                flag = false;
+            } else {
+                flag = true;
+                LOG.info("In SETanswer action function!!!!!!! " + CurrentAnswers.size());
+                answers.add(CurrentAnswers.get(0));
+                LOG.info("In SETanswer function!!!!!!! " + answers.get(i));
+            }
         }
     }
 
@@ -88,29 +115,22 @@ public class QuizeController implements Serializable {
         return score;
     }
 
-    /* public boolean isCorrect() {
-     return response.trim().equalsIgnoreCase(answer); //игнорировать большие,маленькие буквы
-     }
-    
-     public void answerAction() {
-     score = 0;
-     if(this.isCorrect())
-     score++;
-     System.out.println("trololo");
-     } */
-    public String answerAction() {        
-        score = 0;
-        for (int i = 0; i < answers.size(); i++) {
-            if (responseList.get(i).equalsIgnoreCase(answers.get(i))) {
-                score++;
-                LOG.info("Score is " + score + " ==================!!!!!");
+
+    public String answerAction() {
+        LOG.info("! " + flag);
+        if (flag) {
+            score = 0;
+            for (int i = 0; i < answers.size(); i++) {
+                if (responseList.get(i).equalsIgnoreCase(answers.get(i))) {
+                    score++;
+                    LOG.info("Score is " + score + " ==================!!!!!");
+                }
+                LOG.info("In answer action function!!!!!!! " + responseList.get(i) + " " + answers.get(i));
             }
-            LOG.info("In answer action function!!!!!!! " + responseList.get(i) + " " + answers.get(i));
+            return "resultpage";
+        } else {
+            return "errordatabase";
         }
-        return "resultpage";
     }
+
 }
-
-    // Add business logic below. (Right-click in editor and choose
-// "Insert Code > Add Business Method")
-

@@ -3,11 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Test 2(Task1)</title>
     </h:head>
     <h:body>
         <h:form>
             <p>#{quizeController.clearList()}</p>
+            <p>#{quizeController.setTestNumber(2)}</p>
             <h:dataTable var="q_item" value="#{quizeController.questionsList}">
                 <h:column>
                     <p><h:outputText value="#{q_item.question}"/></p>
