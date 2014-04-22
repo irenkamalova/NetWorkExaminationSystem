@@ -7,13 +7,15 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:dataTable var="q_item" value="#{testController.questionsList}">
+            <p>#{quizeController.clearList()}</p>
+            <h:dataTable var="q_item" value="#{quizeController.questionsList}">
                 <h:column>
                     <p><h:outputText value="#{q_item.question}"/></p>
                     <p><h:inputText value="#{quizeController.response}"/></p>
                 </h:column>
             </h:dataTable>
             <p>
+                <p>#{quizeController.setAnswers()}</p>
                 <h:commandButton value="Check Answers" action="#{quizeController.answerAction()}"/>
             </p>
         </h:form>
