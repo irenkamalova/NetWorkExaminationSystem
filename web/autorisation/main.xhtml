@@ -3,25 +3,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    
+
     <h:head>
         <title>Main Title</title>
+        <style type="text/css">
+            body{
+                background-image: url(../resorces/images/bg.jpg);
+            }
+        </style>
+
     </h:head>
-    <h:body>
+    <h:body style="background-image: url(../resorces/images/bg.jpg)">
+        
         You need to autorisate
         <br/>
         <h:form>
             <p:panel>
                 <h:panelGrid columns="2">
-                    <h:outputText value="Login"/>
+                    <h:outputText value="#{messages.login}"/>
                     <h:inputText value="#{usersController.user}"/>
-                    <h:outputText value="Password"/>
+                    <h:outputText value="#{messages.password}"/>
                     <h:inputText value="#{usersController.password}"/>
                 </h:panelGrid>
                 <h:commandButton value="Enter" action="#{usersController.checkUser}"></h:commandButton>
-                
-        </p:panel>
+
+            </p:panel>
         </h:form>
+
+
     </h:body>
 </html>
 

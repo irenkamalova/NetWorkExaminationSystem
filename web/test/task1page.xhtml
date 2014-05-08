@@ -4,18 +4,19 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Task1 Page</title>
+        <title>Test 1(Task1)</title>
     </h:head>
     <h:body>
         Look and answer
         <br/>
         <br/>
         <h:form>
-            <h:dataTable var="q_item" value="#{testController.questionsList}" >
+            <p>#{quizeController.setTestNumber(1)}</p>
+            <h:dataTable var="q_item" value="#{quizeController.questionsList}" >
                 <h:column>
                     <h:outputText value="#{q_item.question}"/>
                     <h:selectOneRadio id="answer" layout="pageDirection" value="#{testController.getAnswerList(q_item.questionId)}">
-                        <f:selectItems var="answ" value="#{testController.getAnswerList(q_item.questionId)}" >
+                        <f:selectItems var="set_item" value="#{testController.getAnswerList(q_item.questionId)}" >
                         </f:selectItems>
                     </h:selectOneRadio>
                 </h:column>

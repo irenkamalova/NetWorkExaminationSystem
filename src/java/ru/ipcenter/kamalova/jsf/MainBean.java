@@ -16,6 +16,27 @@ public class MainBean {
     private String user;
     private String password;
     private String text;
+    private String command = "Router>";
+
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
+    }
+    
+    
+    public void condition() {
+        int f = 0;     
+        if(text.equals("enable"))
+            command = "Router#";
+        if(text.equals("configure terminal"))
+            command = "Router(config)#";
+        
+    }
+    
+    
     public String getUser() {
         return user;
     }

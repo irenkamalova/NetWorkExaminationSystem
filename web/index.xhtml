@@ -1,28 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Welcom page</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        Welcom!
+        Welcome!
         <br/>
         Do you want to login?
         <br/>
         <h:link outcome="/autorisation/main" value="Login"/>
-
-        <br />
-        <h:link outcome="/questions/List" value="Show All Questions Items"/>
-        <br />
-        <h:link outcome="/tasks/List" value="Show All Tasks Items"/>
-        <br />
-        <h:link outcome="/answers/List" value="Show All Answers Items"/>
-        <br />
-        <h:link outcome="/questions/List" value="Show All Questions Items"/>
-        <br />
-        <h:link outcome="/tasks/List" value="Show All Tasks Items"/>
+        <h:inputText id="name" value="#{usersController.user}">
+            <f:ajax event="valueChange" execute="@this" render="nameError"/>
+        </h:inputText>
+        <h:outputText id="nameError" value="#{usersController.user}"/>
+        <!-- Begin Full page background technique -->
+        <div id="bg">
+          <div>
+            <table cellspacing="0" cellpadding="0">
+              <tr>
+                <td><img src="images/bg.jpg" alt=""/> </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- End Full page background technique -->
     </h:body>
 
 
